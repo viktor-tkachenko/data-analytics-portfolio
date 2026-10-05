@@ -8,6 +8,7 @@
 Для кожної комбінації 'date × country × continent × device × channel × test × test_group':
 
 | event_name | Що означає |
+|---|---|
 | 'session' | кількість унікальних сесій |
 | 'session with orders' | кількість унікальних сесій із замовленням |
 | 'new_account' | кількість унікальних сесій, у яких створено акаунт |
