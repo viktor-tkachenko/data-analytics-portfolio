@@ -10,9 +10,9 @@ WITH
       ab.test,
       ab.test_group
     FROM `data-analytics-mate.DA.ab_test` ab
-    JOIN `DA.session` s
+    JOIN `data-analytics-mate.DA.session` s
       ON ab.ga_session_id = s.ga_session_id
-    JOIN `DA.session_params` sp
+    JOIN `data-analytics-mate.DA.session_params` sp
       ON ab.ga_session_id = sp.ga_session_id
   ),
   session_with_orders AS (
@@ -25,7 +25,7 @@ WITH
       session_info.test,
       session_info.test_group,
       COUNT(DISTINCT o.ga_session_id) AS session_with_orders
-    FROM `DA.order` o
+    FROM `data-analytics-mate.DA.order` o
     JOIN session_info
       ON o.ga_session_id = session_info.ga_session_id
     GROUP BY
@@ -48,7 +48,7 @@ WITH
       session_info.test_group,
       ep.event_name,
       COUNT(ep.ga_session_id) AS event_cnt
-    FROM `DA.event_params` ep
+    FROM `data-analytics-mate.DA.event_params` ep
     JOIN session_info
       ON ep.ga_session_id = session_info.ga_session_id
     GROUP BY
@@ -91,7 +91,7 @@ WITH
       session_info.test,
       session_info.test_group,
       COUNT(DISTINCT acs.ga_session_id) AS new_account_cnt
-    FROM `DA.account_session` acs
+    FROM `data-analytics-mate.DA.account_session` acs
     JOIN session_info
       ON acs.ga_session_id = session_info.ga_session_id
     GROUP BY
