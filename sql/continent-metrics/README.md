@@ -9,39 +9,39 @@
 
 | Колонка | Опис |
 |---|---|
-| 'continent' | континент |
-| 'revenue' | загальна виручка |
-| 'revenue_from_mobile' | виручка із замовлень з мобільних пристроїв |
-| 'revenue_from_desktop' | виручка із замовлень з десктопів |
-| 'revenue_percent_from_total' | частка континенту в загальній виручці, % |
-| 'account_count' | кількість унікальних акаунтів |
-| 'verified_account_count' | кількість унікальних верифікованих акаунтів |
-| 'session_count' | кількість сесій |
+| `continent` | континент |
+| `revenue` | загальна виручка |
+| `revenue_from_mobile` | виручка із замовлень з мобільних пристроїв |
+| `revenue_from_desktop` | виручка із замовлень з десктопів |
+| `revenue_percent_from_total` | частка континенту в загальній виручці, % |
+| `account_count` | кількість унікальних акаунтів |
+| `verified_account_count` | кількість унікальних верифікованих акаунтів |
+| `session_count` | кількість сесій |
 
 ## Як це працює
-1. **'revenue_metrics'**: виручка за континентами через 'JOIN' сесій, замовлень і товарів.
-   Розбивка за пристроями зроблена умовною агрегацією 'SUM(CASE WHEN device = ... THEN price ELSE 0 END)'.
-2. **'account_metrics'**: унікальні й верифіковані акаунти за континентами
-   ('COUNT(DISTINCT ...)', щоб акаунт із кількома сесіями не рахувався двічі).
-3. **'session_metrics'**: кількість сесій за континентами.
-4. **Фінальний 'SELECT'**: об'єднує три набори метрик через 'LEFT JOIN' від сесій,
+1. **`revenue_metrics`**: виручка за континентами через `JOIN` сесій, замовлень і товарів.
+   Розбивка за пристроями зроблена умовною агрегацією `SUM(CASE WHEN device = ... THEN price ELSE 0 END)`.
+2. **`account_metrics`**: унікальні й верифіковані акаунти за континентами
+   (`COUNT(DISTINCT ...)`, щоб акаунт із кількома сесіями не рахувався двічі).
+3. **`session_metrics`**: кількість сесій за континентами.
+4. **Фінальний `SELECT`**: об`єднує три набори метрик через `LEFT JOIN` від сесій,
    тож континенти без акаунтів чи замовлень не губляться.
-   Частка виручки рахується віконною функцією 'SUM() OVER ()'.
+   Частка виручки рахується віконною функцією `SUM() OVER ()`.
    Результат відсортовано за виручкою.
 
 ## Інструменти й прийоми
 - Google BigQuery (GoogleSQL)
-- CTE, 'JOIN' / 'LEFT JOIN', 'GROUP BY'
-- Умовна агрегація ('SUM(CASE WHEN ...)', 'COUNT(DISTINCT CASE WHEN ...)')
-- Віконна функція 'SUM() OVER ()'
-- 'ROUND', 'ORDER BY'
+- CTE, `JOIN` / `LEFT JOIN`, `GROUP BY`
+- Умовна агрегація (`SUM(CASE WHEN ...)`, `COUNT(DISTINCT CASE WHEN ...)`)
+- Віконна функція `SUM() OVER ()`
+- `ROUND`, `ORDER BY`
 
-## Використані таблиці (схема 'DA')
-'session_params', 'order', 'product', 'account', 'account_session'
+## Використані таблиці (схема `DA`)
+`session_params`, `order`, `product`, `account`, `account_session`
 
 ## Результат
 <img width="1363" height="307" alt="image" src="https://github.com/user-attachments/assets/3d24fdcd-381b-4145-a333-e620dbb37e01" />
 
 
 ## Файли
-- 'continent_metrics.sql': основний запит
+- `continent_metrics.sql`: основний запит
