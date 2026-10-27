@@ -3,8 +3,8 @@
 End-to-end analysis of an online furniture store's sales: data extraction with **SQL (BigQuery)**, exploratory and statistical analysis in **Python (Jupyter)**, and an interactive dashboard in **Tableau Public**.
 
 **Links**
-- Dashboard: [Ecommerce Sales Dashboard](ВСТАВ_ПОСИЛАННЯ_TABLEAU)
-- Notebook: [Ecommerce_Sales_Analytics (Google Colab)](ВСТАВ_ПОСИЛАННЯ_COLAB)
+- Dashboard: [Ecommerce Sales Dashboard](https://public.tableau.com/views/EcommerceSalesDashboard_17930470371160/SalesOverview?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+- Notebook: [Ecommerce_Sales_Analytics (Google Colab)](https://colab.research.google.com/drive/1SBRL3HCrykFOk9UtksumJjNjZxhmHd7G?usp=sharing)
 
 ## Dataset
 - Source: Google BigQuery (`data-analytics-mate.DA`), 6 tables joined with LEFT JOINs so that every session is kept, including sessions without registration or purchase.
